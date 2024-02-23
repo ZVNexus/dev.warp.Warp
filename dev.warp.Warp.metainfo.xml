@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>dev.warp.Warp</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <developer id="warp.dev">
+    <name>Warp</name>
+  </developer>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Warp</name>
+  <summary>The modern terminal</summary>
+
+  <url type="homepage">https://www.warp.dev</url>
+  <url type="help">https://www.warp.dev/faq</url>
+
+  <description>
+    <p>
+      Warp is a modern, Rust-based terminal with AI built in so you and your
+      team can build great software faster.
+    </p>
+    <p>
+      NOTE: This wrapper is not verified by, affiliated with, or supported by
+      Warp.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">dev.warp.Warp.desktop</launchable>
+
+  <provides>
+    <mediatype>x-scheme-handler/warp</mediatype>
+  </provides>
+
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+    <display_length compare="ge">768</display_length>
+  </supports>
+
+  <requires>
+    <internet>first-run</internet>
+  </requires>
+
+  <content_rating type="oars-1.1" />
+
+  <!-- https://docs.warp.dev/getting-started/changelog -->
+  <releases>
+    <release version="0.2024.02.20.08.01" date="2024-02-20">
+      <description>
+        <p>Improvements</p>
+        <ul>
+          <li>Completions for apt-get, aptitude, and pacman.</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

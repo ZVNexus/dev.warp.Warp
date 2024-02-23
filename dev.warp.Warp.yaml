@@ -1,0 +1,55 @@
+id: dev.warp.Warp
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: warp-terminal
+tags: [proprietary]
+finish-args:
+  - --device=dri
+  - --filesystem=host
+  - --share=ipc
+  - --share=network
+  - --socket=pulseaudio
+  - --socket=ssh-auth
+  - --socket=x11
+  - --socket=wayland
+  - --system-talk-name=org.freedesktop.UPower
+  - --talk-name=org.freedesktop.Flatpak
+  - --talk-name=org.freedesktop.secrets
+modules:
+  - name: warp-terminal
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 apply_extra ${FLATPAK_DEST}/bin/apply_extra
+      - install -Dm755 warp-terminal ${FLATPAK_DEST}/bin/warp-terminal
+      - install -Dm644 ${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 ${FLATPAK_ID}.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+    sources:
+      - type: extra-data
+        filename: warp-terminal.deb
+        only-arches: [x86_64]
+        url: https://releases.warp.dev/stable/v0.2024.02.20.08.01.stable_01/warp-terminal_0.2024.02.20.08.01.stable.01_amd64.deb
+        sha256: c787df48f1177c8434e5370cc068d0b30c5e89f145cb964b94e2342db781801b
+        size: 28107028
+        x-checker-data:
+          type: html
+          url: https://docs.warp.dev/getting-started/changelog
+          url-template: https://releases.warp.dev/stable/v$version.stable_01/warp-terminal_$version.stable.01_amd64.deb
+          version-pattern: (\d+\.\d{4}\.\d{2}\.\d{2}\.\d{2}\.\d{2})
+      - type: file
+        path: dev.warp.Warp.desktop
+      - type: file
+        path: dev.warp.Warp.metainfo.xml
+      - type: file
+        path: dev.warp.Warp.png
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - bsdtar -xf warp-terminal.deb data.tar.xz
+          - tar -xJf data.tar.xz --strip-components=4 ./opt/warpdotdev/warp-terminal
+          - rm data.tar.xz warp-terminal.deb
+      - type: script
+        dest-filename: warp-terminal
+        commands:
+          - exec /app/extra/warp "$@"
