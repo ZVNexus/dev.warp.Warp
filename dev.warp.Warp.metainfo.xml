@@ -25,6 +25,13 @@
 
   <launchable type="desktop-id">dev.warp.Warp.desktop</launchable>
 
+  <screenshots>
+    <screenshot type="default">
+      <caption>The Warp main window, in solarized mode</caption>
+      <image type="source">https://raw.githubusercontent.com/ZVNexus/dev.warp.Warp/main/screenshots/main-window.png</image>
+    </screenshot>
+  </screenshots>
+
   <provides>
     <mediatype>x-scheme-handler/warp</mediatype>
   </provides>
